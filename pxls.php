@@ -1,7 +1,7 @@
 <?php
 class pxls{
 
-	public $bgColor; //Cor de fundo da cÃ©lula
+	public $bgColor; //Cor de fundo da celula
 	public $size;    //tamanho da font
 	public $color;   //Cor da font
 	
@@ -78,7 +78,13 @@ class pxls{
 				$align = "center";
 		}
 		
-		echo "<th align={$align} bgcolor={$this->bgColor} colspan={$colspan} ><font size={$this->size} color={$this->color} >".$valor."</font></th>";
+		if(is_array($valor)){
+			foreach ($valor as $coluna){
+				echo "<th align={$align} bgcolor={$this->bgColor} colspan={$colspan} ><font size={$this->size} color={$this->color} >".$coluna."</font></th>";
+			}
+		}else{
+			echo "<th align={$align} bgcolor={$this->bgColor} colspan={$colspan} ><font size={$this->size} color={$this->color} >".$valor."</font></th>";
+		}
 	}
 	
 	//Inicia a abertura de uma tabela
@@ -114,10 +120,16 @@ class pxls{
 			default:
 				$align = "center";
 		}
-		echo "<td align={$align}><font size={$this->size} color={$this->color}>".$valor."</font></td>";
+		if(is_array($valor)){
+			foreach ($valor as $valorCelula){
+				echo "<td align={$align}><font size={$this->size} color={$this->color}>".$valorCelula."</font></td>";
+			}
+		}else{
+			echo "<td align={$align}><font size={$this->size} color={$this->color}>".$valor."</font></td>";
+		}
 	}
 
-	//Mesclar Celulas
+	//Mesclar CÃ©lulas
 	function addColSpan($valor, $qtdColl, $pAlign="C"){
 		$align = "C";		
 		switch(strtoupper($pAlign)){
